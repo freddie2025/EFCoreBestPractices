@@ -4,9 +4,9 @@
 
 Entity Framework is an amazing set of tooling around data access. With EFCore, that tooling becomes even more powerful. So why is it that I still don't recommend that people use EFCore? In this [video](https://www.youtube.com/watch?v=qkJ9keBmQWo&t=40s), I will walk you through the best practices of Entity Framework and EFCore and point out the pitfalls to avoid. We will discuss where there are problems and what to do to resolve those problems. For more information check out my [Blog Post](https://www.iamtimcorey.com/blog/137806/entity-framework).
 
-# EF Core Cheat Sheet
+## EF Core Cheat Sheet
 
-## Install EF Core
+### Install EF Core
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/get-started/)
 
@@ -17,7 +17,7 @@ Entity Framework is an amazing set of tooling around data access. With EFCore, t
   * [Choose your DB provider...](https://docs.microsoft.com/en-us/ef/core/providers/)
 * `dotnet add package Microsoft.EntityFrameworkCore.Design`
 
-## Create *Model*
+### Create *Model*
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/modeling/)
 
@@ -64,11 +64,11 @@ public class Blog
 }
 ```
 
-## Connection String in `appsettings.json`
+### Connection String in `appsettings.json`
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-strings#aspnet-core)
 
-### Create *appsettings.json* file:
+#### Create *appsettings.json* file:
 
 ```json
 {
@@ -78,7 +78,7 @@ public class Blog
 }
 ```
 
-### Read connection string in ASP.NET Core's startup class:
+#### Read connection string in ASP.NET Core's startup class:
 
 ```csharp
 public class Startup
@@ -102,11 +102,11 @@ public class Startup
 }
 ```
 
-## Create a *DbContext*
+### Create a *DbContext*
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/miscellaneous/configuring-dbcontext)
 
-### `DbContextOptions` in Constructor:
+#### `DbContextOptions` in Constructor:
 
 ```csharp
 public class BloggingContext : DbContext
@@ -119,7 +119,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-### Add `DbContext` to ASP.NET Core Dependency Injection:
+#### Add `DbContext` to ASP.NET Core Dependency Injection:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -129,7 +129,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Option: Add logging ([Documentation](https://docs.microsoft.com/en-us/ef/core/miscellaneous/logging))
+#### Option: Add logging ([Documentation](https://docs.microsoft.com/en-us/ef/core/miscellaneous/logging))
 
 ```csharp
 public static readonly ILoggerFactory MyLoggerFactory
@@ -140,7 +140,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder.UseLoggerFactory(MyLoggerFactory);
 ```
 
-### Option: Switch to *Newtonsoft.Json* by installing the `Microsoft.AspNetCore.Mvc.NewtonsoftJson` NuGet package and adding the following code to *Startup.cs* ([documentation...](https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.0&tabs=visual-studio#jsonnet-support)):
+#### Option: Switch to *Newtonsoft.Json* by installing the `Microsoft.AspNetCore.Mvc.NewtonsoftJson` NuGet package and adding the following code to *Startup.cs* ([documentation...](https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.0&tabs=visual-studio#jsonnet-support)):
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -152,7 +152,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## Query Data
+### Query Data
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/querying/)
 
@@ -166,7 +166,7 @@ public void ConfigureServices(IServiceCollection services)
 | Raw SQL queries   | `FromSql`                                       |
 | Sorting           | `OrderBy`, `OrderByDescending`                  |
 
-## Saving Data
+### Saving Data
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/saving/)
 
@@ -176,7 +176,7 @@ public void ConfigureServices(IServiceCollection services)
 | Delete instance | `Remove`           |
 | Save            | `SaveChangesAsync` |
 
-### Transactions:
+#### Transactions:
 
 ```csharp
 using (var transaction = context.Database.BeginTransaction())
@@ -198,7 +198,7 @@ using (var transaction = context.Database.BeginTransaction())
 
 Set state of external object to *modified*: `context.Entry(obj).State = EntityState.Modified;`
 
-## Manage DB Schema
+### Manage DB Schema
 
 [Documentation](https://docs.microsoft.com/en-us/ef/core/managing-schemas/)
 

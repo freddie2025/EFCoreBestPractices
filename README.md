@@ -1,1 +1,1 @@
-# EFCoreBestPractices
+# EF Core Best Practices
